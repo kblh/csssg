@@ -1,0 +1,10 @@
+/*******************************************
+  PRINT CSS
+********************************************/
+
+.print-only { display: none; }
+
+@media print {
+  .print-only { display: block; }
+  * { color: #000!important; }
+} /* PRINT CSS (end) */

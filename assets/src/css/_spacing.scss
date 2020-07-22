@@ -1,0 +1,30 @@
+/*******************************************
+  SPACING
+********************************************/
+
+/* 
+  breakpoints
+
+  example: 
+  @media screen and (min-width: $min-md) { ... }
+  @media screen and (max-width: $max-md) { ... }
+*/
+
+$max-xs: 479.9px;
+$min-sm: 480px;
+$max-sm: 719.9px;
+$min-md: 720px;
+$max-md: 959.9px;
+$min-lg: 960px;
+$max-lg: 1279.9px;
+$min-xl: 1280px;
+
+
+/* spacing */
+$global-spacing-unit: 10px;
+
+/* grid */
+$grid-gap: $global-spacing-unit;
+$grid-desktop: $min-lg;
+$grid-tablet: $min-md;
+$grid-mobile: $min-sm;

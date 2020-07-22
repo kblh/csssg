@@ -1,0 +1,82 @@
+/*******************************************
+  INFO
+  e.g. alert, badge, tooltip, label, tag, modal
+********************************************/
+
+/*********************
+  modal
+*********************/
+
+.c-modal__cover {
+  visibility: visible;
+  position: fixed;
+  /* 
+  -- use flex OR left: 50%; transform: translateX(-50%);
+  display: flex;
+  justify-content: center; 
+  */
+  padding-top: 60px;
+  content: "";
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.8);
+}
+
+.c-modal--is-hidden {
+  visibility: hidden;
+}
+
+.c-modal--is-hidden .c-modal {
+  opacity: 0;
+}
+
+.c-modal {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
+  z-index: 1000;
+  min-width: 400px;
+  max-width: 825px;
+  background-color: $color-background;
+  opacity: 1;
+  transition: $transition-default;
+}
+.c-modal:after {
+  content: " . "; /* fix for FF */
+  color: transparent;
+  position: absolute;
+  height: 120px;
+}
+
+.c-modal__header {
+  position: relative;
+  background-color: $color-primary;
+  padding: $global-spacing-unit $global-spacing-unit*2;
+  color: $color-background;
+}
+
+.c-modal__header h3 {
+  margin: 0;
+}
+
+.c-modal__header svg {
+  fill: $color-text-inverse;
+}
+
+.c-modal__close {
+  position: absolute;
+  top: $global-spacing-unit;
+  right: $global-spacing-unit;
+  cursor: pointer;
+  color: $color-text-inverse;
+}
+
+.c-modal__content {
+  padding: $global-spacing-unit*2;
+}
+

@@ -1,0 +1,85 @@
+/*******************************************
+  LAYOUT
+  prefix: .l-
+  elements without graphical representation
+  e.g. containers, form-group, columns
+********************************************/
+
+
+/*********************
+  containers
+*********************/
+
+.l-container-default {
+  width: $min-xl; 
+  max-width: 100%;
+  margin: 0 auto;
+  padding-top: $global-spacing-unit*2;
+  padding-bottom: $global-spacing-unit*2;
+}
+
+.l-container-full {
+  width: 100%;
+  margin: 0;
+  padding: $global-spacing-unit*2;
+}
+
+.l-container-image {
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+  min-height: 450px;
+}
+
+
+/*********************
+  form group
+*********************/
+
+.l-form-group {
+  margin-bottom: $global-spacing-unit*2;
+}
+
+// .l-form-group__label {  }
+.l-form-group__input { margin: 3px 0; }
+.l-form-group__validation { font-size: 85%; }
+
+/*********************
+  columns
+*********************/
+
+.l-columns-2 { column-count: 1 }
+.l-columns-3 { column-count: 1 }
+.l-columns-4 { column-count: 1 }
+.l-columns-5 { column-count: 1 }
+.l-columns-6 { column-count: 1 }
+
+@media screen and (min-width: $min-sm) { 
+  .l-columns-3 { column-count: 2 }
+  .l-columns-4 { column-count: 2 }
+  .l-columns-5 { column-count: 3 }
+  .l-columns-6 { column-count: 3 }
+}
+
+@media screen and (min-width: $min-md) { 
+  .l-columns-2 { column-count: 2 }
+  .l-columns-3 { column-count: 3 }
+  .l-columns-4 { column-count: 4 }
+  .l-columns-5 { column-count: 5 }
+  .l-columns-6 { column-count: 6 }
+}
+
+
+/*********************
+  menu
+*********************/
+
+.l-menu-horizontal { padding: 0; margin: 0; }
+  .l-menu-horizontal ul { padding: 0; margin: 0; }
+  .l-menu-horizontal li { display: inline-block;  list-style-type: none;  }
+  .l-menu-horizontal a { display: inline-block; text-align: center; padding: 0 $global-spacing-unit; }
+
+.l-menu-vertical { padding: 0; margin: 0; }
+  .l-menu-vertical ul { padding: 0; margin: 0; }
+  .l-menu-vertical li { list-style-type: none;  }
+

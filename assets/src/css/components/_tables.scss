@@ -1,0 +1,29 @@
+/*******************************************
+  TABLES
+********************************************/
+
+.c-table { 
+  border-collapse: collapse;
+}
+  .c-table th { 
+    text-align: left; 
+    font-weight: $font-bold; 
+  }
+
+  .c-table th,
+  .c-table td { 
+    padding: $global-spacing-unit; 
+    border-bottom: 1px solid $color-border;
+  }
+
+  .c-table th:first-child,
+  .c-table td:first-child { padding-left: 0; }
+  .c-table th:last-child,
+  .c-table td:last-child { padding-right: 0; }
+
+/* stripped */
+.c-table--striped th,
+.c-table--striped td { border: 0; }
+.c-table--striped tr:nth-child(odd) { background-color: $color-white; }
+.c-table--striped tr:nth-child(even) { background-color: $color-grey-200; }
+

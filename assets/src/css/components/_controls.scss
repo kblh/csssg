@@ -1,0 +1,65 @@
+/*******************************************
+  CONTROLS
+  e.g. button, link
+********************************************/
+
+$button-height: 48px;
+$button-tiny-height: 33px;
+
+/*********************
+  button
+*********************/
+
+.c-btn {
+  white-space: nowrap;
+  display: inline-block;
+  border: 1px solid transparent;
+  min-height: $button-height;
+  height: $button-height;
+  line-height: $button-height;
+  padding: 0 $global-spacing-unit*2;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  vertical-align: top;
+}
+
+.c-btn--tiny {
+  min-height: $button-tiny-height;
+  height: $button-tiny-height;
+  line-height: $button-tiny-height;
+}
+
+.c-btn--rounded {
+  border-radius: $button-height;
+}
+
+.c-btn--primary {
+  background-color: $color-primary;
+  color: $color-text-inverse;
+  border-color: $color-primary;
+}
+  .c-btn--primary:hover {
+    background-color: lighten($color-primary, 5%);
+    border-color: lighten($color-primary, 5%);
+  }
+
+.c-btn--primary-outline {
+  background: transparent;
+  color: $color-primary;
+  border-color: $color-primary;
+}
+  .c-btn--primary-outline:hover {
+    color: darken($color-primary, 10%);
+    border-color: darken($color-primary, 10%);
+  }
+
+.c-btn--muted {
+  background-color: $color-muted;
+  color: $color-text;
+  border-color: $color-muted;
+}
+  .c-btn--muted:hover {
+    background-color: darken($color-muted, 5%);
+    border-color: darken($color-muted, 5%);
+  }
