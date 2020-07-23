@@ -6,6 +6,7 @@ const sourcemaps   = require('gulp-sourcemaps');
 const del          = require('del');
 const rename       = require('gulp-rename');
 const size         = require('gulp-size');
+const fileinclude  = require('gulp-file-include');
 
 /*********************
   Directories
@@ -20,7 +21,7 @@ const dir = {
 *********************/
 
 /* compile scss (SRC -> SRC) */
-function cssCompile(done) {
+function cssCompileTask(done) {
   gulp.src(dir.appSrc + 'css/main.scss')
     .pipe(sourcemaps.init())
     .pipe(sass())
@@ -61,9 +62,11 @@ function cssCompile(done) {
 
 
 
-/* clean (DIST) dir */
-function cleanDist(done) {
+/* clean ....... */
+function cleanTask(done) {
   del.sync([ dir.appDst ]);
+  del.sync([ dir.appSrc + 'html' ]);
+  del.sync([ dir.appSrc + 'css/main.css' ]);
   done();
 }
 
@@ -73,14 +76,14 @@ function cleanDist(done) {
 // });
 
 /* DEFAULT - watch all changes (SRC) */
-// gulp.task('default', gulp.series('cssCompile', (done) => {
+// gulp.task('default', gulp.series('cssCompileTask', (done) => {
   // browserSync.init({
   //   server: {
   //     baseDir: dir.appSrc
   //   }
   // });
 
-//  gulp.watch(dir.appSrc + 'css/**/*.scss' , gulp.series('cssCompile'));
+//  gulp.watch(dir.appSrc + 'css/**/*.scss' , gulp.series('cssCompileTask'));
   // gulp.watch(dir.appSrc + 'templates/*.html' , gulp.series('fileinclude'));
   // gulp.watch(dir.appSrc + 'templates/**/*.html' , gulp.series('fileinclude'));
   // gulp.watch(dir.appSrc + 'templates/*.html').on('change', browserSync.reload);
@@ -89,6 +92,24 @@ function cleanDist(done) {
 //  done();
 //}));
 
+/*********************
+  Fileinclude
+*********************/
 
-exports.compile = gulp.series(cssCompile);
-exports.clean = gulp.series(cleanDist);
+function fileIncludeTask(done) {
+  gulp.src([dir.appSrc + 'templates/*.html'])
+    .pipe(fileinclude({
+      prefix: '@@',
+      basepath: '@file'
+    }))
+    .pipe(gulp.dest(dir.appSrc + 'html'))
+    .pipe(size({
+      title: 'Size of HTML'
+    }));
+  done();
+}
+
+
+exports.html = gulp.series(fileIncludeTask)
+exports.clean = gulp.series(cleanTask);
+exports.compile = gulp.series(cssCompileTask,fileIncludeTask);

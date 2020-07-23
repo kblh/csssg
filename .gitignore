@@ -1,6 +1,6 @@
 node_modules/
 assets/dist/
-assets/src/result
+assets/src/html
 assets/src/css/main.css
 package-lock.json
 .sass-cache/

@@ -13,6 +13,10 @@
 
 /* tools (mixins, functions) */
 
+/* generic (normalize styles, box-sizing definition) */
+@import 'lib/normalize';
+@import 'lib/box-sizing';
+
 /* elements (bare HTML elements) */
 @import '_basic-elements';
 
