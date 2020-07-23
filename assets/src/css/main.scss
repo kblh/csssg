@@ -3,21 +3,25 @@
   date: 
 ********************************************/
 
-/* settings */
+/* structure of main.scss file is based on ITCSS methodology */
+
+/* settings (variables) */
 @import '_colors';
 @import '_spacing';
 @import '_fonts';
 @import '_animation';
 
+/* tools (mixins, functions) */
+
+/* elements (bare HTML elements) */
+@import '_basic-elements';
+
+/* objects (undecorated design patterns) */
+@import '_layout';
+
 /* libs */
 @import 'lib/font-awesome';
 @import 'lib/flexboxgrid';
-
-/* elements */
-@import '_basic-elements';
-
-/* objects */
-@import '_layout';
 
 /* components */
 @import 'components/inputs';
@@ -29,4 +33,6 @@
 
 /* utilities */
 @import 'lib/micro-tachyons';
+
+/* shame css (temporary hacks and quick-fixes) */
 @import 'shame';
