@@ -7,6 +7,7 @@ const del          = require('del');
 const rename       = require('gulp-rename');
 const size         = require('gulp-size');
 const fileinclude  = require('gulp-file-include');
+const browserSync  = require('browser-sync').create();
 
 /*********************
   Directories
@@ -92,6 +93,12 @@ function cleanTask(done) {
 //  done();
 //}));
 
+function watchTask(done) {
+  gulp.watch(dir.appSrc + 'css/**/*.scss' , gulp.series('css'));
+  gulp.watch(dir.appSrc + 'templates/**/*.html' , gulp.series('html'));
+  done();
+}
+
 /*********************
   Fileinclude
 *********************/
@@ -110,6 +117,8 @@ function fileIncludeTask(done) {
 }
 
 
-exports.html = gulp.series(fileIncludeTask)
 exports.clean = gulp.series(cleanTask);
+exports.css = gulp.series(cssCompileTask);
+exports.html = gulp.series(fileIncludeTask);
 exports.compile = gulp.series(cssCompileTask,fileIncludeTask);
+exports.default = gulp.series(cssCompileTask,fileIncludeTask,watchTask);
