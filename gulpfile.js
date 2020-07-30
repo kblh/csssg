@@ -8,9 +8,6 @@ const del          = require('del');
 const size         = require('gulp-size');
 const fileinclude  = require('gulp-file-include');
 
-/*********************
-  Directories
-*********************/
 const dir = {
   appDst: './assets/dist/',
   appSrc: './assets/src/'
@@ -32,10 +29,7 @@ function cssCompileTask(done) {
 }
 
 function copyImagesTask(done) {
-  gulp.src([
-    dir.appSrc + 'images/*',
-    dir.appSrc + 'images/*/*'
-  ])
+  gulp.src(dir.appSrc + 'images/**/*')
     .pipe(gulp.dest(dir.appDst + 'images/'))
     .pipe(size({
       title: 'Size of images'
@@ -44,10 +38,7 @@ function copyImagesTask(done) {
 }
 
 function copyFontsTask(done) {
-  gulp.src([
-    dir.appSrc + 'fonts/*',
-    dir.appSrc + 'fonts/*/*'
-  ])
+  gulp.src(dir.appSrc + 'fonts/**/*')
     .pipe(gulp.dest(dir.appDst + 'fonts/'))
     .pipe(size({
       title: 'Size of fonts'
@@ -56,20 +47,16 @@ function copyFontsTask(done) {
 }
 
 function scriptsCompileTask(done) {
-  gulp.src([
-    dir.appSrc + 'js/*',
-    dir.appSrc + 'js/*/*'
-  ])
+  gulp.src(dir.appSrc + 'js/**/*.js')
     .pipe(sourcemaps.init())
     .pipe(terser())
-    .pipe(sourcemaps.write('./'))
+    .pipe(sourcemaps.write('maps'))
     .pipe(gulp.dest(dir.appDst + 'js/'))
     .pipe(size({
       title: 'Size of scrips'
     }));
   done();
 }
-
 
 function fileIncludeTask(done) {
   gulp.src([dir.appSrc + 'templates/*.html'])
@@ -90,8 +77,9 @@ function cleanTask(done) {
 }
 
 function watchTask(done) {
-  gulp.watch(dir.appSrc + 'css/**/*.scss' , gulp.series('css'));
-  gulp.watch(dir.appSrc + 'templates/**/*.html' , gulp.series('html'));
+  gulp.watch(dir.appSrc + 'css/**/*.scss' , gulp.series(cssCompileTask));
+  gulp.watch(dir.appSrc + 'js/**/*.js' , gulp.series(scriptsCompileTask));
+  gulp.watch(dir.appSrc + 'templates/**/*.html' , gulp.series(fileIncludeTask));
   done();
 }
 
