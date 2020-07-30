@@ -3,6 +3,7 @@ const watch        = require('gulp-watch');
 const sass         = require('gulp-sass');
 const cleanCSS     = require('gulp-clean-css');
 const sourcemaps   = require('gulp-sourcemaps');
+const terser       = require('gulp-terser');
 const del          = require('del');
 const size         = require('gulp-size');
 const fileinclude  = require('gulp-file-include');
@@ -54,19 +55,21 @@ function copyFontsTask(done) {
   done();
 }
 
-
-function cleanTask(done) {
-  del.sync([ dir.appDst ]);
-  del.sync([ dir.appSrc + 'html' ]);
-  del.sync([ dir.appSrc + 'css/main.css' ]);
+function scriptsCompileTask(done) {
+  gulp.src([
+    dir.appSrc + 'js/*',
+    dir.appSrc + 'js/*/*'
+  ])
+    .pipe(sourcemaps.init())
+    .pipe(terser())
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest(dir.appDst + 'js/'))
+    .pipe(size({
+      title: 'Size of scrips'
+    }));
   done();
 }
 
-function watchTask(done) {
-  gulp.watch(dir.appSrc + 'css/**/*.scss' , gulp.series('css'));
-  gulp.watch(dir.appSrc + 'templates/**/*.html' , gulp.series('html'));
-  done();
-}
 
 function fileIncludeTask(done) {
   gulp.src([dir.appSrc + 'templates/*.html'])
@@ -81,10 +84,22 @@ function fileIncludeTask(done) {
   done();
 }
 
-exports.clean = gulp.series(cleanTask);
-exports.css = gulp.series(cssCompileTask);
-exports.html = gulp.series(fileIncludeTask);
-exports.assets = gulp.series(copyImagesTask,copyFontsTask);
+function cleanTask(done) {
+  del.sync([ dir.appDst ]);
+  done();
+}
 
-exports.compile = gulp.series(copyImagesTask,copyFontsTask,cssCompileTask,fileIncludeTask);
-exports.default = gulp.series(copyImagesTask,copyFontsTask,cssCompileTask,fileIncludeTask,watchTask);
+function watchTask(done) {
+  gulp.watch(dir.appSrc + 'css/**/*.scss' , gulp.series('css'));
+  gulp.watch(dir.appSrc + 'templates/**/*.html' , gulp.series('html'));
+  done();
+}
+
+exports.clean = gulp.parallel(cleanTask);
+exports.css = gulp.parallel(cssCompileTask);
+exports.html = gulp.parallel(fileIncludeTask);
+exports.js = gulp.parallel(scriptsCompileTask);
+exports.assets = gulp.parallel(copyImagesTask,copyFontsTask);
+
+exports.compile = gulp.parallel(copyImagesTask,copyFontsTask,cssCompileTask,fileIncludeTask,scriptsCompileTask);
+exports.default = gulp.series(gulp.parallel(copyImagesTask,copyFontsTask,cssCompileTask,fileIncludeTask,scriptsCompileTask),watchTask);
