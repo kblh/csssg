@@ -23,12 +23,37 @@ function cssCompileTask(done) {
       keepSpecialComments : 0
     }))
     .pipe(sourcemaps.write('maps'))
-    .pipe(gulp.dest(dir.appSrc + 'css/'))
+    .pipe(gulp.dest(dir.appDst + 'css/'))
     .pipe(size({
       title: 'Size of CSS'
     }));
   done();
 }
+
+function copyImagesTask(done) {
+  gulp.src([
+    dir.appSrc + 'images/*',
+    dir.appSrc + 'images/*/*'
+  ])
+    .pipe(gulp.dest(dir.appDst + 'images/'))
+    .pipe(size({
+      title: 'Size of images'
+    }));
+  done();
+}
+
+function copyFontsTask(done) {
+  gulp.src([
+    dir.appSrc + 'fonts/*',
+    dir.appSrc + 'fonts/*/*'
+  ])
+    .pipe(gulp.dest(dir.appDst + 'fonts/'))
+    .pipe(size({
+      title: 'Size of fonts'
+    }));
+  done();
+}
+
 
 function cleanTask(done) {
   del.sync([ dir.appDst ]);
@@ -49,7 +74,7 @@ function fileIncludeTask(done) {
       prefix: '@@',
       basepath: '@file'
     }))
-    .pipe(gulp.dest(dir.appSrc + 'html'))
+    .pipe(gulp.dest(dir.appDst + 'html'))
     .pipe(size({
       title: 'Size of HTML'
     }));
@@ -59,5 +84,7 @@ function fileIncludeTask(done) {
 exports.clean = gulp.series(cleanTask);
 exports.css = gulp.series(cssCompileTask);
 exports.html = gulp.series(fileIncludeTask);
-exports.compile = gulp.series(cssCompileTask,fileIncludeTask);
-exports.default = gulp.series(cssCompileTask,fileIncludeTask,watchTask);
+exports.assets = gulp.series(copyImagesTask,copyFontsTask);
+
+exports.compile = gulp.series(copyImagesTask,copyFontsTask,cssCompileTask,fileIncludeTask);
+exports.default = gulp.series(copyImagesTask,copyFontsTask,cssCompileTask,fileIncludeTask,watchTask);
