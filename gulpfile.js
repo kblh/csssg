@@ -80,6 +80,8 @@ function watchTask(done) {
   gulp.watch(dir.appSrc + 'css/**/*.scss' , gulp.series(cssCompileTask));
   gulp.watch(dir.appSrc + 'js/**/*.js' , gulp.series(scriptsCompileTask));
   gulp.watch(dir.appSrc + 'templates/**/*.html' , gulp.series(fileIncludeTask));
+  gulp.watch(dir.appSrc + 'images/**/*' , gulp.series(copyImagesTask));
+  gulp.watch(dir.appSrc + 'fonts/**/*' , gulp.series(copyFontsTask));
   done();
 }
 

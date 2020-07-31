@@ -1,5 +1,5 @@
 /*******************************************
-  site: CSS Styleguide:
+  site: CSS Styleguide
   date: 
 ********************************************/
 
@@ -12,6 +12,7 @@
 @import '_animation';
 
 /* tools (mixins, functions) */
+@import '_mixins';
 
 /* generic (normalize styles, box-sizing definition) */
 @import 'lib/normalize';
@@ -33,6 +34,7 @@
 @import 'components/info';
 @import 'components/navigation';
 @import 'components/tables';
+@import 'components/icons';
 @import 'components/csssg';
 
 /* utilities */
