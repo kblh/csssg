@@ -9,6 +9,3 @@ npm install --save-dev del gulp-rename gulp-size
 
 gulp --tasks
 
-
-- nové ikony (Bootstrap, jako v Logio)
-
