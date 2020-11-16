@@ -43,6 +43,7 @@ $button-tiny-height: 33px;
     background-color: lighten($color-primary, 5%);
     border-color: lighten($color-primary, 5%);
   }
+  .c-btn--primary:focus { outline-color: $color-text-inverse; }
 
 .c-btn--primary-outline {
   background: transparent;

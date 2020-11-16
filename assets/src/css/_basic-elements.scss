@@ -33,3 +33,8 @@ h1, h2, h3, h4 {
 hr { color: $color-muted; background-color: $color-muted; height: 1px; border: 0px; }
 
 svg { fill: currentColor; }
+
+:focus {
+  outline: 2px dotted $color-link;
+  outline-offset: -4px;
+}

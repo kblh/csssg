@@ -20,6 +20,27 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
 
   /**
+   * Password input toggler
+   */
+
+  const togglePassword = document.querySelectorAll(".js-password-toggle__button");
+
+  function togglePasswordHandler(e) {
+    const password = this.previousElementSibling;
+
+    // toggle the type attribute
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+    // toggle the eye slash icon
+    // this.classList.toggle('fa-eye-slash');
+  }
+
+  for (var i = 0; i < togglePassword.length; i++) {
+    togglePassword[i].addEventListener('click', togglePasswordHandler);
+  }
+
+
+  /**
    * stopPropagation
    */
   const stopPropagationElements = document.querySelectorAll(".js-stop-propagation");
